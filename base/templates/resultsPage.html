@@ -4,175 +4,184 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Result</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/result.css') }}?v={{ timestamp }}"> 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}?v={{ timestamp }}"> 
-    
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/result.css') }}?v={{ timestamp }}">
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
+
 </head>
 <body>
-    <header>
-        <div class="logo-container">
-            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo">
-            <span>Mission-Smart Cities</span>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="/dashboard">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="/logout">Logout</a></li>
-            </ul>
-        </nav>
-    </header>
-    <div class="main-container">
-        <div class="file-container">
-            <div class="file-canvas">
-                {% if vo_list %}
-                    {% if model_name == 'garbage' %}
-                        {% if vo_list %}
-                            <p class="file-name">File Name: {{ vo_list.file_name }}</p>
-                            {% if vo_list.file_name.endswith(('.jpg', '.jpeg', '.png')) %}
-                                <div class="result-item">
-                                    <img class="result-image" width="800" height="500" src="{{ url_for('static', filename='outputs/' + vo_list.file_name) }}" alt="Annotated Image">
-                                </div>
-                                <div class="button-container">
-                                <a class="link-button" href="/upload">Upload Again</a>
-                                <a class="link-button" href="{{ url_for('static', filename='outputs/' + vo_list.file_name) }}" download>Download Image</a>
-                                </div>
-                            {% elif vo_list.file_name.endswith(('.mp4', '.mov', '.avi', '.mkv')) %}
-                                <div class="result-item">
-                                    <video class="result-video" id="videoPlayer" width="800" height="500" controls>
-                                        <source src="{{ url_for('static', filename='outputs/' + vo_list.file_name) }}" type="video/mp4">
-                                        Your browser does not support the video tag.
-                                    </video>                                    
-                                </div>
-                                <div class="button-container">
-                                <a class="link-button" href="/upload">Upload Again</a>
-                                <a class="link-button" href="{{ url_for('static', filename='outputs/' + vo_list.file_name) }}" download>Download Video</a>
-                                </div>
-                            {% endif %}
-                        {% else %}
-                            <p>No file information available.</p>
-                        {% endif %}
-                    {% else %}
-                        <p class="file-name">Filename: {{ vo_list[0][1].file_name }}</p>
-                        {% if vo_list[0][1].file_name.endswith(('.jpg', '.jpeg', '.png')) %}
-                            <div class="result-item">
-                                <img class="result-image" width="800" height="500" src="{{ url_for('static', filename='outputs/' + vo_list[0][1].file_name) }}" alt="Annotated Image">
-                            </div>
-                            <div class="button-container">
-                            <a class="link-button" href="/upload">Upload Again</a>
-                            <a class="link-button" href="{{ url_for('static', filename='outputs/' + vo_list[0][1].file_name) }}" download>Download Image</a>
-                            </div>
-                        {% elif vo_list[0][1].file_name.endswith(('.mp4', '.mov', '.avi', '.mkv')) %}
-                            <div class="result-item">
-                                <video class="result-video" id="videoPlayer" width="800" height="500" controls>
-                                    <source src="{{ url_for('static', filename='outputs/' + vo_list[0][1].file_name) }}" type="video/mp4">
-                                    Your browser does not support the video tag.
-                                </video>
-                            </div>
-                            <div class="button-container">
-                            <a class="link-button" href="/upload">Upload Again</a>
-                            <a class="link-button" href="{{ url_for('static', filename='outputs/' + vo_list[0][1].file_name) }}" download>Download Video</a>
-                            <a class="link-button" href="/view-analytics?file_id={{vo_list[0][1].file_id}}&model_name={{model_name}}">View Analytics</a>            
-                            </div>
-                        {% endif %}
-                    {% endif %}
-                {% else %}
-                    <p>No results available.</p>
-                {% endif %}
-            </div>
-        </div>    
-        {% if model_name in ['pothole', 'cattle'] %}
-            {% if vo_list[0][1].file_name.endswith(('.mp4', '.mov', '.avi', '.mkv')) %}
-
-            <div class="table-container">
-                <div class="table-canvas" id="tableCanvas">
-                    {% if vo_list %}
-                        {% if model_name == 'pothole' %}
-                        <div class="table-data" id="tableData">
-                            <table border="1px">
-                                <thead>
-                                    <tr>
-                                        <td>Frame No.</td>
-                                        <td>Pothole Counts</td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for pothole, _ in vo_list %}
-                                        <tr data-time="{{ pothole.frame_id }}">
-                                            <td>{{ pothole.frame_id }}</td>
-                                            <td>{{ pothole.pothole_counts }}</td>
-                                        </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                        </div><br>
-                        {% elif model_name == 'cattle' %}
-                        <div class="table-data" id="tableData">
-                            <table border="1px">
-                                <thead>
-                                    <tr>
-                                        <td>Frame No.</td>
-                                        <td>Cattle Counts</td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for cattle, _ in vo_list %}
-                                        <tr data-time="{{ cattle.frame_id }}">
-                                            <td>{{ cattle.frame_id }}</td>
-                                            <td>{{ cattle.cattle_counts }}</td>
-                                        </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                        </div><br>
-                        {% elif model_name == 'garbage' %}
-                            <p>No counts for the Garbage Model.</p>
-                        {% endif %}
-                    {% endif %}
+<header>
+    <div class="logo-container">
+        <img src="{{ url_for('static', filename='images/logo.png') }}"
+             alt="Logo">
+        <span>Mission-Smart Cities</span>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="/dashboard">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+<div class="main-container">
+    <div class="file-container">
+        <div class="file-canvas">
+            {% if model_name == 'garbage' %}
+                <p class="file-name">File Name: {{ vo_list[0].file_name }}</p>
+                {% if vo_list[0].file_type == 'image' %}
+                    <div class="result-item">
+                        <img class="result-image" width="800" height="500"
+                             src="{{ url_for('static', filename='outputs/' +
+                                     vo_list[0].file_name) }}"
+                             alt="Annotated Image">
                     </div>
+                    <div class="button-container">
+                        <a class="link-button" href="/upload">Upload Again</a>
+                        <a class="link-button"
+                           href="{{ url_for('static', filename='outputs/' +
+                                   vo_list[0].file_name) }}"
+                           download>Download Image</a>
+                    </div>
+                {% elif vo_list[0].file_type == 'video' %}
+                    <div class="result-item">
+                        <video class="result-video" id="videoPlayer"
+                               width="800" height="500" controls>
+                            <source src="{{ url_for('static',
+                                    filename='outputs/' + vo_list[0].file_name) }}"
+                                    type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="button-container">
+                        <a class="link-button" href="/upload">Upload Again</a>
+                        <a class="link-button"
+                           href="{{ url_for('static', filename='outputs/' +
+                                   vo_list[0].file_name) }}"
+                           download>Download Video</a>
+                    </div>
+                {% endif %}
+            {% else %}
+            <p class="file-name">Filename: {{ vo_list[0][1].file_name }}</p>
+            {% if vo_list[0][1].file_type == 'image' %}
+                <div class="result-item">
+                    <img class="result-image" width="800" height="500"
+                         src="{{ url_for('static', filename='outputs/' + vo_list[0][1].file_name) }}"
+                         alt="Annotated Image">
+                </div>
+                <div class="button-container">
+                    <a class="link-button" href="/upload">Upload Again</a>
+                    <a class="link-button"
+                       href="{{ url_for('static', filename='outputs/' + vo_list[0][1].file_name) }}"
+                       download>Download Image</a>
+                </div>
+            {% elif vo_list[0][1].file_type == 'video' %}
+                <div class="result-item">
+                    <video class="result-video" id="videoPlayer" width="800"
+                           height="500" controls>
+                        <source src="{{ url_for('static', filename='outputs/' + vo_list[0][1].file_name) }}"
+                                type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="button-container">
+                    <a class="link-button" href="/upload">Upload Again</a>
+                    <a class="link-button"
+                       href="{{ url_for('static', filename='outputs/' + vo_list[0][1].file_name) }}"
+                       download>Download Video</a>
+                    <a class="link-button"
+                       href="/view-analytics?file_id={{ vo_list[0][1].file_id }}&model_name={{ model_name }}">View
+                        Analytics</a>
                 </div>
             {% endif %}
-
-        {% endif %}
+            {% endif %}
+        </div>
     </div>
-    <script>
-        var video = document.getElementById('videoPlayer');
-        var tableContainer = document.getElementById('tableCanvas');
+    {% if model_name in ['pothole', 'cattle'] %}
+        {% if vo_list[0][1].file_type == 'video' %}
+            <div class="table-container">
+                <div class="table-canvas" id="tableCanvas">
+                    {% if model_name == 'pothole' %}
+                        <div class="table-data" id="tableData">
+                            <table border="1px">
+                                <thead>
+                                <tr>
+                                    <td>Frame No.</td>
+                                    <td>Pothole Counts</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for pothole, _ in vo_list %}
+                                    <tr data-time="{{ pothole.frame_id }}">
+                                        <td>{{ pothole.frame_id }}</td>
+                                        <td>{{ pothole.pothole_counts }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div><br>
+                    {% elif model_name == 'cattle' %}
+                        <div class="table-data" id="tableData">
+                            <table border="1px">
+                                <thead>
+                                <tr>
+                                    <td>Frame No.</td>
+                                    <td>Cattle Counts</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for cattle, _ in vo_list %}
+                                    <tr data-time="{{ cattle.frame_id }}">
+                                        <td>{{ cattle.frame_id }}</td>
+                                        <td>{{ cattle.cattle_counts }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+    {% endif %}
+</div>
+<script>
+    var video = document.getElementById('videoPlayer');
+    var tableContainer = document.getElementById('tableCanvas');
 
-        video.addEventListener('timeupdate', function() {
-            var timePlayed = Math.round(video.currentTime);
-            var tableRows = document.querySelectorAll('tr[data-time]');
+    video.addEventListener('timeupdate', function () {
+        var timePlayed = Math.round(video.currentTime);
+        var tableRows = document.querySelectorAll('tr[data-time]');
 
-            // Remove previous highlight
-            tableRows.forEach(function(row) {
-                row.classList.remove('highlighted');
-            });
-
-            // Highlight the current row based on the time
-            tableRows.forEach(function(row) {
-                var rowTime = parseInt(row.getAttribute('data-time'), 10);
-                if (timePlayed === rowTime) {
-                    row.classList.add('highlighted');
-                    scrollToHighlightedRow(tableContainer, row);
-                    // Stop after finding the first match
-                    return;
-                }
-            });
+        // Remove previous highlight
+        tableRows.forEach(function (row) {
+            row.classList.remove('highlighted');
         });
 
-        // Function to scroll the table to keep the highlighted row visible
-        function scrollToHighlightedRow(container, highlightedRow) {
-            var containerHeight = container.offsetHeight; // Use offsetHeight to get the visible height
-            var rowTop = highlightedRow.offsetTop;
-            var rowHeight = highlightedRow.offsetHeight; // Use offsetHeight to get the height including padding and borders
-
-            if (rowTop < container.scrollTop || rowTop + rowHeight > container.scrollTop + containerHeight) {
-                container.scrollTop = rowTop - (containerHeight - rowHeight) / 2;
+        // Highlight the current row based on the time
+        tableRows.forEach(function (row) {
+            var rowTime = parseInt(row.getAttribute('data-time'), 10);
+            if (timePlayed === rowTime) {
+                row.classList.add('highlighted');
+                scrollToHighlightedRow(tableContainer, row);
+                // Stop after finding the first match
+                return;
             }
+        });
+    });
+
+    // Function to scroll the table to keep the highlighted row visible
+    function scrollToHighlightedRow(container, highlightedRow) {
+        var containerHeight = container.offsetHeight; // Use offsetHeight to get the visible height
+        var rowTop = highlightedRow.offsetTop;
+        var rowHeight = highlightedRow.offsetHeight; // Use offsetHeight to get the height including padding and borders
+
+        if (rowTop < container.scrollTop || rowTop + rowHeight > container.scrollTop + containerHeight) {
+            container.scrollTop = rowTop - (containerHeight - rowHeight) / 2;
         }
-    </script>
+    }
+</script>
 
 {#    <footer>#}
 {#        <div class="footer-content">#}

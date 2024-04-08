@@ -1,1 +1,1 @@
-from base.com.controller import file_controller
+from base.com.controller import detection_controller
