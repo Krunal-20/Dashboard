@@ -1,0 +1,359 @@
+@import url('https://fonts.googleapis.com/css2?family=Secular+One&display=swap');
+
+body {
+    background-color: lightgray; 
+    margin: 0;
+    padding: 0;
+    font-family: 'Secular One', sans-serif; 
+    letter-spacing: 1.5px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  margin: 0;
+  background-color: darkslategray;
+  width: auto;
+}
+
+header, footer {
+    flex-shrink: 0;
+}
+
+.logo-container{
+    display: flex;
+    align-items: center;
+}
+
+.logo-container img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    border-radius: 10px;
+}
+
+.logo-container span {
+    font-weight: bold;
+    font-size: x-large;
+    color: black;
+}
+
+nav {
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul {
+    margin-right: 20px;
+}
+
+nav li {
+    display: inline-block;
+    background-color: #ccc;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+nav li:nth-child(n-1) {
+    margin-right: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: black;
+}
+
+nav a:hover {
+    opacity: 0.8;
+    color: blue;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: row;
+    height: 83vh; 
+}
+
+.file-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    overflow: hidden; 
+    background-color: #fff;
+}
+
+.table-container {
+    display: flex;
+    width: 30%;
+    overflow: hidden; 
+    padding-top: 0.7%;
+    padding-bottom: 0.7%;
+    background-color: #fff;
+}
+
+.file-canvas {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px;
+    background-color: #cacdd2;
+    min-height: 93%;
+    border-radius: 10px;
+    padding: 0px 5%;
+    z-index: 5;
+}
+
+.table-canvas {
+    margin: 10px;
+    background-color: #cacdd2;
+    min-height: 93%;
+    border-radius: 10px;
+    padding: 0px 5%;
+    z-index: 5;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.table-data {
+    padding: 5% 0.1%;
+    min-width: 100%;
+}
+
+.chart-container {
+    width: 100%; /* Same width as the image */
+    height: 100%; /* Same height as the image */
+}
+
+#myChart {
+    width: 800px;
+    height: 500px;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    padding: 5px;
+}
+
+.link-button {
+    display: inline-block;
+    padding: 10px 20px; 
+    background-color: #007bff; 
+    color: #fff; 
+    text-decoration: none; 
+    border: none; 
+    border-radius: 5px; 
+    margin-inline: 5px;
+    cursor: pointer; 
+    transition: background-color 0.3s; 
+}
+
+.link-button:hover {
+    background-color: #0056b3; 
+}
+
+.highlighted {
+    background-color: rgb(189, 189, 31);
+}
+
+table {
+    border-collapse: collapse;
+    border: 1px solid black;
+    width: 100%;
+}
+
+table, th, td {
+    padding: 5px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+thead {
+    position: sticky;
+    top: 0;
+    background-color: #f0f0f0; 
+    z-index: 1; 
+}
+
+th {
+    font-weight: bold;
+}
+
+.upload-button {
+    background-color: rgb(102, 179, 102);
+    padding: 5px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    bottom: 20px;
+    right: 20px;
+}
+
+.upload-button:hover {
+    background-color: rgb(70, 141, 70);
+    text-decoration: none;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #111;
+    height: auto;
+    width: auto;
+    padding-top: 10px;
+    color: #fff;
+}
+
+.footer-content {
+    align-items: center;
+    margin-top: -30px;
+    margin-bottom: -30px;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.footer-content h3 {
+    font-size: 2.1rem;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.footer-content p {
+    max-width: 500px;
+    margin: 10px auto;
+    line-height: 20px;
+    font-size: 14px;
+    color: #cacdd2;
+}
+
+.socials {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0 3rem 0;
+}
+
+.socials li {
+    margin: 0 10px;
+}
+
+.socials a {
+    text-decoration: none;
+    color: #fff;
+    border: 1.1px solid white;
+    padding: 5px;
+    border-radius: 50%;
+}
+
+.socials a i {
+    font-size: 1.1rem;
+    width: 20px;
+    transition: color .4s ease;
+}
+
+.socials a:hover i {
+    color: aqua;
+}
+
+.footer-bottom {
+    background: #000;
+    width: auto;
+    padding-bottom: 40px;
+    text-align: center;
+}
+
+.footer-bottom p {
+    float: left;
+    font-size: 14px;
+    word-spacing: 2px;
+    text-transform: capitalize;
+}
+
+.footer-bottom p a {
+    color: #44bae8;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.footer-bottom span {
+    text-transform: uppercase;
+    opacity: .4;
+    font-weight: 200;
+}
+
+.footer-menu {
+    float: right;
+}
+
+.footer-menu ul {
+    display: flex;
+}
+
+.footer-menu ul li {
+    padding-right: 10px;
+    display: block;
+}
+
+.footer-menu ul li a {
+    color: #cfd2d6;
+    text-decoration: none;
+}
+
+.footer-menu ul li a:hover {
+    color: #27bcda;
+}
+
+::-webkit-scrollbar {
+    width: 10px; 
+}
+    
+::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+  
+  
+::-webkit-scrollbar-thumb {
+    background: #888; 
+    border-radius: 8px; 
+}
+    
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+  
+
+@media (max-width: 500px) {
+    .footer-menu ul {
+        display: flex;
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .file-container, .table-container {
+        flex: 100%; 
+    }
+}

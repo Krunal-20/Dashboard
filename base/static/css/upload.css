@@ -1,0 +1,382 @@
+@import url('https://fonts.googleapis.com/css2?family=Secular+One&display=swap');
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    
+    margin: 0;
+    padding: 0;
+    font-family: 'Secular One', sans-serif; 
+    letter-spacing: 1.5px;
+}
+
+.dropzone-box {    
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 1rem;
+    border-radius: 0.8rem;
+    max-width: 40rem;
+    width: 100%;
+    background: #fff;
+}
+
+.dropzone-box h2 {
+    font-size: 1.4rem;
+    margin-bottom: 0.6rem;
+    margin: 0.6rem 1.2rem;
+}
+
+.dropzone-box p{
+    font-size: 1.15rem;
+    margin: 0.6rem 1.2rem;
+}
+
+.dropzone-area {
+    padding: 1rem;
+    position: relative;
+    margin: 1.2rem;
+    min-height: 10rem;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 2px dashed #000;
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dropzone-area [type="file"] {
+    cursor: pointer;
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.dropzone-area .file-upload-icon svg {
+    height: 6rem;
+    max-width: 6rem;
+    width: 100%;
+    margin-bottom: 0.5rem;
+    stroke: #000;
+}
+
+.dropzone-area:hover {
+    background: lightgray;
+}
+
+.dropzone--over {
+    border: 2px solid #8800ff;
+    background: #262626;
+}
+
+.dropzone-actions {
+    display: flex;
+    justify-content: space-between;
+    margin: 1.2rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.dropzone-actions button {
+    flex-grow: 1;
+    font-family: 'Secular One', sans-serif;
+    min-height: 3rem;
+    font-size: 1.2rem;
+    border: none;
+    transition: background 0.3s ease;
+}
+
+.dropzone-actions button[type='reset'] {
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    color: white;
+    background: #262620;
+    cursor: pointer;
+    border: lpx solid #333333;
+}
+
+.dropzone-actions button[type='reset']:hover {
+    opacity: 0.8;
+}
+
+.dropzone-actions button[type='submit'] {
+    background: #8800ff;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.dropzone-actions button[type='submit']:hover {
+    opacity: 0.8;
+}
+
+.upload-container {
+    margin: 50px auto;
+    text-align: center;
+}
+
+#loader {
+    border: 8px solid #f3f3f3; 
+    border-top: 8px solid #3498db; 
+    border-radius: 50%;
+    width: 50px; 
+    height: 50px; 
+    animation: spin 1s linear infinite;
+    position: absolute; 
+    top: 35%; 
+    left: 45%; 
+    transform: translate(-50%, -50%); 
+    z-index: 1000;
+}
+  
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity here */
+    z-index: 999;
+}
+
+.loading-overlay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+  
+@keyframes spin {
+    0% { transform: rotate(0deg); } 
+    100% { transform: rotate(360deg); } 
+}
+    
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: darkslategray;
+    width: auto;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo-container img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    border-radius: 10px;
+}
+
+.logo-container span {
+    font-weight: bold;
+    font-size: x-large;
+    color: black;
+}
+
+nav {
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul {
+    margin-right: 20px;
+}
+
+nav li {
+    display: inline-block;
+    background-color: #ccc;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+nav li:nth-child(n-1) {
+    margin-right: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: black;
+}
+
+nav a:hover {
+    opacity: 0.8;
+}
+
+.container {
+    margin: 0 auto;
+    margin-top: 50px;
+    width: 640px;
+    padding: 20px;
+    border-radius: 1rem;
+    background-color: darkslategray;
+}
+
+.main-head h2 {
+    margin: 5px 0px;
+}
+
+.model-select {
+    width: 100%; 
+    display: flex;
+    justify-content: space-around;
+}
+
+.radio-button-label {
+    display: inline-block;
+    padding: 10px 10px;
+    margin: 5px;
+    background-color: #4CAF50;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.radio-button-input {
+    display: none;
+}
+
+.radio-button-input:checked + .radio-button-label {
+    background-color: #a04545;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #111;
+    height: auto;
+    width: auto;
+    padding-top: 10px;
+    color: #fff;
+}
+
+.footer-content {
+    align-items: center;
+    margin-top: -30px;
+    margin-bottom: -30px;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.footer-content h3 {
+    font-size: 2.1rem;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.footer-content p {
+    max-width: 500px;
+    margin: 10px auto;
+    line-height: 20px;
+    font-size: 14px;
+    color: #cacdd2;
+}
+
+.socials {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0 3rem 0;
+}
+
+.socials li {
+    margin: 0 10px;
+}
+
+.socials a {
+    text-decoration: none;
+    color: #fff;
+    border: 1.1px solid white;
+    padding: 5px;
+    border-radius: 50%;
+}
+
+.socials a i {
+    font-size: 1.1rem;
+    width: 20px;
+    transition: color .4s ease;
+}
+
+.socials a:hover i {
+    color: aqua;
+}
+
+.footer-bottom {
+    background: #000;
+    width: auto;
+    padding-bottom: 40px;
+    text-align: center;
+}
+
+.footer-bottom p {
+    float: left;
+    font-size: 14px;
+    word-spacing: 2px;
+    text-transform: capitalize;
+}
+
+.footer-bottom p a {
+    color: #44bae8;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.footer-bottom span {
+    text-transform: uppercase;
+    opacity: .4;
+    font-weight: 200;
+}
+
+.footer-menu {
+    float: right;
+}
+
+.footer-menu ul {
+    display: flex;
+}
+
+.footer-menu ul li {
+    padding-right: 10px;
+    display: block;
+}
+
+.footer-menu ul li a {
+    color: #cfd2d6;
+    text-decoration: none;
+}
+
+.footer-menu ul li a:hover {
+    color: #27bcda;
+}
+
+@media (max-width: 500px) {
+    .footer-menu ul {
+        display: flex;
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+}

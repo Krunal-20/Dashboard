@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}?v={{ timestamp }}"> 
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo">
+            <span>Mission-Smart Cities</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/dashboard">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="content-container">
+        <div class="box">
+            <h2 class="my-heading">Welcome to the Dashboard</h2>
+            <div class="my-div">
+                <table>
+                    <tr class="row-one">
+                        <td>
+                            <p>An Integrated Approach to Smart Urban Infrastructure: Designing and Implementing a Multi-Modal
+                                Detection System for Cattle, Potholes, and Garbage Using Computer Vision and Machine Learning.</p>
+                            <p>Please feel free to use our detection models on Garbage, Pothole, and Cattle.</p>
+                        </td>
+                    </tr>
+                    <tr class="row-two">
+                        <!-- <td><a href="/logout">Logout</a></td> -->
+                        <td><a href="/upload" class="link-button">PERFORM YOUR INFERENCE HERE</a></td>
+                    </tr>
+                </table>
+            </div>  
+        </div>
+    </div>
+{#    <footer>#}
+{#        <div class="footer-bottom">#}
+{#            <p>copyright &copy; <a href="#">Smart City</a></p>#}
+{#            <div class="footer-menu">#}
+{#                <ul class="f-menu"> #}
+{#                    <li><a href="">Contact</a></li>#}
+{#                    <li><a href="">Blog</a></li>#}
+{#                </ul>#}
+{#            </div>#}
+{#        </div>#}
+{#    </footer>#}
+</body>
+</html>

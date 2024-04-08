@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Secular+One&display=swap');
+
+    body {
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        font-family: 'Secular One', sans-serif;
+        margin: 0;
+        padding: 0;
+        background: radial-gradient(circle,#77B0AA,#135D66);
+    }
+
+    .my-div {
+        background: rgba(0, 0, 10, 0.1);
+        backdrop-filter: blur(2px);
+        display: inline-block;
+        padding: 50px 80px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    table {
+        width: 100%;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 12px;
+        font-size: 16px;
+        color: #000;
+        letter-spacing: 1.5px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+        margin-bottom: 20px;
+    }
+
+    button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 25px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    button:hover {
+        opacity: 0.8;
+    }

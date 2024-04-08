@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/analytics.css') }}?v={{ timestamp }}"> 
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo">
+            <span>Mission-Smart Cities</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/dashboard">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="main-container">
+        <div class="file-container">
+            <div class="file-canvas">
+                <p class="file-name">Frame vs Count</p>
+                <div class="chart-container" id="chartContainer">
+                    <canvas id="myChart"></canvas>
+                </div>
+                <div class="button-container">
+                    <a class="link-button" href="/upload">Upload Again</a>
+                    <a class="link-button" id="downloadChartButton">Download Chart</a>
+                    <a class="link-button" onclick="goBack()">Back</a>            
+                </div>
+            </div>
+        </div>    
+        <div class="table-container">
+            <div class="table-canvas">
+                {% if vo_list %}
+                    {% if model_name == 'pothole' %}
+                    <div class="table-data" id="tableData">
+                        <table border="1px">
+                            <thead>
+                                <tr>
+                                    <td>Frame No.</td>
+                                    <td>Pothole Counts</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for pothole, _ in vo_list %}
+                                    <tr data-time="{{ pothole.frame_id }}">
+                                        <td>{{ pothole.frame_id }}</td>
+                                        <td>{{ pothole.pothole_counts }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div><br>
+                    {% elif model_name == 'cattle' %}
+                    <div class="table-data" id="tableData">
+                        <table border="1px">
+                            <thead>
+                                <tr>
+                                    <td>Frame No.</td>
+                                    <td>Cattle Counts</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for cattle, _ in vo_list %}
+                                    <tr data-time="{{ cattle.frame_id }}">
+                                        <td>{{ cattle.frame_id }}</td>
+                                        <td>{{ cattle.cattle_counts }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div><br>
+                    {% elif model_name == 'garbage' %}
+                        <p>No counts for the Garbage Model.</p>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <script>
+        // Extract data from the HTML table and prepare it for chart
+
+        function goBack() {
+            window.history.back();
+        }
+
+        var frameIds = [];
+        var counts = [];
+        var rows = document.querySelectorAll("#tableData tbody tr");
+        rows.forEach(function(row) {
+            var frameId = row.querySelector("td:first-child").innerText;
+            var count = parseInt(row.querySelector("td:last-child").innerText);
+            frameIds.push(frameId);
+            counts.push(count);
+        });
+
+        // Create a line chart
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: frameIds,
+                datasets: [{
+                    label: 'Counts', // Label for the dataset
+                    data: counts, // Actual data points
+                    fill: true, // Fill the area under the line
+                    backgroundColor: 'rgba(0, 0, 255, 0.4)', // Fill color with alpha value less than 1
+                    borderColor: 'rgb(0, 0, 255)', // Border color for the line
+                    tension: 0.2, // How much the line should be smoothed
+                    borderWidth: 3, // Border width for the line
+                    pointBackgroundColor: 'rgb(0, 0, 100)', // Color for the points on the line
+                    pointBorderColor: 'rgb(75, 192, 192)', // Border color for the points
+                    pointBorderWidth: 2, // Border width for the points
+                    pointRadius: 4, // Radius of the points
+                    pointHoverRadius: 6, // Radius of the points on hover
+                    pointHitRadius: 10, // Radius for hit detection on the points
+                    pointStyle: 'circle', // Style for the points (circle, cross, crossRot, dash, line, rect, rectRounded, rectRot, star, triangle)
+                    showLine: true, // Whether to show the line or not
+                    stepped: false, // Whether the line is stepped or not
+                    spanGaps: false, // Whether to draw the line between points with missing data
+                    borderDash: [], // Length and spacing of dashes for dashed lines
+                    borderDashOffset: 1, // Offset for dashed lines
+                    hoverBackgroundColor: 'rgba(0, 0, 255, 0.8)', // Background color on hover
+                    hoverBorderColor: 'rgba(75, 192, 192, 0.8)', // Border color on hover
+                    hoverBorderWidth: 2 // Border width on hover
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    filler: {
+                        propagate: true // Extend the fill color to the edge of the chart
+                    }
+                }
+            }
+        });
+
+        document.getElementById('downloadChartButton').addEventListener('click', function() {
+            var canvas = document.getElementById('myChart');
+            var url = canvas.toDataURL('image/png');
+            var link = document.createElement('a');
+            link.href = url;
+            link.download = 'chart.png';
+            link.click();
+        });
+    </script>
+
+{#    <footer>#}
+{#        <div class="footer-content">#}
+{#        </div>#}
+{#        <div class="footer-bottom">#}
+{#            <p>copyright &copy; <a href="#">Smart City</a></p>#}
+{#            <div class="footer-menu">#}
+{#                <ul class="f-menu">#}
+{#                    <li><a href="">Contact</a></li>#}
+{#                    <li><a href="">Blog</a></li>#}
+{#                </ul>#}
+{#            </div>#}
+{#        </div>#}
+{#    </footer>#}
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}?v={{ timestamp }}">
+</head>
+<body>
+
+    <div class="my-div">
+    <p><b><h1>Login Here</h1></b></p>
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+                {% for message in messages %}
+                    <p style="color: red;">{{ message }}</p>
+                {% endfor %}
+        {% endif %}
+      {% endwith %}
+        <form action="/login" method="post">
+            <table>
+                <tr>
+                    <td>
+                        <label for="user-name">Username:</label>
+                        <input type="text" name="username" placeholder="username" value="admin">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="password">Password:</label>
+                        <input type="password" name="password" placeholder="password" value="admin@21189">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button>Login</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
+<style>
+    /* Import the "Secular One" font */
+
+</style>
+</html>
