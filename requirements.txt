@@ -1,10 +1,9 @@
 Flask==3.0.2
 Flask-SQLAlchemy
-Flask-Cors
+Flask-Migrate
 pymysql
 ultralytics
-python-opencv
-scikit-learn
+opencv-python
 matplotlib
 pandas
 seaborn
